@@ -7,9 +7,18 @@ var FormView = {
   },
 
   handleSubmit: function(event) {
+    var select = $("#rooms select")[0];
+    var roomname = select[select.selectedIndex].value
+    var message = {
+      username: App.username,
+      text: event.target[0].value,
+      roomname: roomname
+    }
     // Stop the browser from submitting the form
     event.preventDefault();
-    
+
+    Parse.create(message)
+    MessagesView.renderMessage(message);
     console.log('click!');
   },
 
