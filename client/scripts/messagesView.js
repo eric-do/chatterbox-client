@@ -19,7 +19,9 @@ var MessagesView = {
     // Append the html to #chats
     if (message.username && message.text) {
       message.username = this.sanitarize(message.username);
-      message.text = this.sanitarize(message.text);
+      message.text = this.sanitarize(message.text.slice(0, 160));
+      Messages[message.objectId] = message.text; 
+      message.avatar = `https://ui-avatars.com/api/?rounded=true&size=90name=${message.username}`;
       var chat = MessageView.render(message);
       this.$chats.append(chat);
     }
@@ -35,7 +37,7 @@ var MessagesView = {
       "/": '&#x2F;',
     };
     const reg = /[&<>"'/]/ig;
-    return str.replace(reg, (match)=>(map[match]));
+    return str.replace(reg, (match)=>(map[match])).replace(/(\r\n|\n|\r)/gm, "");
   }
 
 };
