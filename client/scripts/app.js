@@ -13,7 +13,13 @@ var App = {
 
     // Fetch initial batch of messages
     App.startSpinner();
-    App.fetch(App.stopSpinner);
+    setInterval(function loadMessages() {
+      // Set a named function to be executed immediately
+      // Named function is returned to setInterval and gets called again on interval
+      App.fetch(App.stopSpinner);
+      console.log('run');
+      return loadMessages;
+    }(), 10000);
 
   },
 
@@ -25,9 +31,9 @@ var App = {
   // The success callback is ran if the ajax call is successful
   // The success callback in this case is the fadeout of the spinner, and setting Formview Status to false
   fetch: function(callback = ()=>{}) {
-    return Parse.readAll((data) => {
-
-      data.results.forEach((message) => {
+    return Parse.readAll(data => {
+      data.results.forEach(message => {
+        message.username = 
         MessagesView.renderMessage(message);
       });
       console.log(data);

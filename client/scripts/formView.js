@@ -7,6 +7,14 @@ var FormView = {
   },
 
   handleSubmit: function(event) {
+    // Input: event generated from button click
+    // Return: nothing
+    // Get users's room using jQuery
+    // Get users's message from event
+    // Get users's username from App.username
+    // Generate message object using variables above
+    // Send message through parse
+    // Render message on screen
     var select = $("#rooms select")[0];
     var roomname = select[select.selectedIndex].value;
     var message = {
