@@ -17,11 +17,20 @@ var App = {
 
   },
 
+  // Fetch is a function
+  // Input: a callback function definition
+  // Return: nothing
+  // Fetch is a function that is passed a callback function def
+  // Fetch then calls Parse.readAll, passing an anonymous function as the success callback
+  // The success callback is ran if the ajax call is successful
+  // The success callback in this case is the fadeout of the spinner, and setting Formview Status to false
   fetch: function(callback = ()=>{}) {
-    Parse.readAll((data) => {
-      // examine the response from the server request:
-      console.log(data);
+    return Parse.readAll((data) => {
 
+      data.results.forEach((message) => {
+        MessagesView.renderMessage(message)
+      })
+      console.log(data);
       callback();
     });
   },

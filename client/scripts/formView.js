@@ -14,6 +14,10 @@ var FormView = {
   },
 
   setStatus: function(active) {
+    // (This function was pre-written)
+    // Input: updated status
+    // Return: nothing
+    // This function takes the active status
     var status = active ? 'true' : null;
     FormView.$form.find('input[type=submit]').attr('disabled', status);
   }
