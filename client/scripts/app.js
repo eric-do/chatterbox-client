@@ -8,13 +8,10 @@ var App = {
     App.username = window.location.search.substr(10);
 
     FormView.initialize();
-    RoomsView.initialize();
     MessagesView.initialize();
-
-    // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-
+    RoomsView.initialize();
   },
 
   // Fetch is a function
@@ -26,11 +23,10 @@ var App = {
   // The success callback in this case is the fadeout of the spinner, and setting Formview Status to false
   fetch: function(callback = ()=>{}) {
     return Parse.readAll((data) => {
-
-      data.results.forEach((message) => {
-        MessagesView.renderMessage(message)
-      })
-      console.log(data);
+      Messages.currentMessages = data.results.slice();
+      MessagesView.render(data.results);
+      RoomsView.render();
+      console.log(JSON.stringify(Rooms));
       callback();
     });
   },

@@ -9,9 +9,10 @@ var FormView = {
   handleSubmit: function(event) {
     var select = $("#rooms select")[0];
     var roomname = select[select.selectedIndex].value
+    var text = event.target[0] ? event.target[0].value : undefined;
     var message = {
       username: App.username,
-      text: event.target[0].value,
+      text: text,
       roomname: roomname
     }
     // Stop the browser from submitting the form

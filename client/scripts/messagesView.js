@@ -3,17 +3,16 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function() {
-    MessagesView.$chats.on('click', '.chat .username', function() {
+    this.$chats.on('click', '.chat .username', function() {
       var username = this.textContent;
       Friends.toggleStatus(username);
     });
   },
 
-//   'click', 'a.myclass', function() {
-//     // do something
-// });
-
-  render: function() {
+  render: function(results) {
+    results.forEach((message) => {
+      this.renderMessage(message)
+    });
   },
 
   renderMessage: function(message) {
@@ -23,8 +22,14 @@ var MessagesView = {
     // Append the html to #chats
     if (message.username && message.text) {
       var chat = MessageView.render(message);
+      if(!Rooms[message.roomname]) {
+        Rooms[message.roomname] = 0;
+      }
       this.$chats.append(chat);
     }
+  },
+  clearMessages: function() {
+    this.$chats.empty()
   }
 
 };
