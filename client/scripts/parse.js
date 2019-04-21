@@ -25,7 +25,6 @@ var Parse = {
       url: Parse.server,
       type: 'GET',
       data: { order: '-createdAt' },
-      where: { roomname: 'Hello' },
       contentType: 'application/json',
       success: successCB,
       error: errorCB || function(error) {
