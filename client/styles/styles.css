@@ -163,7 +163,7 @@ input[type=submit]  {
 }
 
 .chat:hover {
-    background-color: #ddd;
+    background-color: #10171e;
 }
 
 .avatar-container {
@@ -186,8 +186,8 @@ input[type=submit]  {
 }
 
 .friend {
-  color: #fff;
-  background-color: #0090da;
+  color: #0090da;
+ 
 }
 
 .message-container {
@@ -204,4 +204,11 @@ input[type=submit]  {
   -moz-border-radius:10px;
   /* webkit */
   -webkit-border-radius:10px;
+}
+
+.heart {
+  display: block;
+  align: right;
+  height: 20px;
+  width: auto;
 }

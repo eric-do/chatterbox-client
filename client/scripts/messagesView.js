@@ -6,6 +6,8 @@ var MessagesView = {
     this.$chats.on('click', '.chat .username', function() {
       var username = this.textContent;
       Friends.toggleStatus(username);
+      $(this).addClass("friend");
+      console.log('Friend added');
     });
   },
 
@@ -26,6 +28,7 @@ var MessagesView = {
       Messages[message.objectId] = message.text; 
       Rooms.addRoom(message.roomname);
       message.avatar = `https://api.adorable.io/avatars/90/${message.username}`;
+
       var chat = MessageView.render(message);
       this.$chats.append(chat);
     }
