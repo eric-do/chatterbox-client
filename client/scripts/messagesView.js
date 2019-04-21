@@ -3,13 +3,16 @@ var MessagesView = {
   $chats: $('#chats'),
 
   initialize: function() {
-    MessagesView.$chats.on('click', '.chat .username', function() {
+    this.$chats.on('click', '.chat .username', function() {
       var username = this.textContent;
       Friends.toggleStatus(username);
     });
   },
-  
-  render: function() {
+
+  render: function(results) {
+    results.forEach((message) => {
+      this.renderMessage(message);
+    });
   },
 
   renderMessage: function(message) {
@@ -18,17 +21,21 @@ var MessagesView = {
     // Get an html object/var from call MessageView.render(message)
     // Append the html to #chats
     if (message.username && message.text) {
-      message.username = this.sanitarize(message.username);
-      message.text = this.sanitarize(message.text.slice(0, 160));
+      message.username = message.username;
+      message.text = message.text.slice(0, 160);
       Messages[message.objectId] = message.text; 
-      Rooms[message.roomname] = Rooms[message.roomname] ? Rooms[message.roomname] : 0;
+      Rooms.addRoom(message.roomname);
       message.avatar = `https://api.adorable.io/avatars/90/${message.username}`;
       var chat = MessageView.render(message);
       this.$chats.append(chat);
     }
   },
 
-  sanitarize: function(str) {
+  clearMessages: function() {
+    this.$chats.empty();
+  },
+
+  sanitarize: function (string) {
     const map = {
       '&': '&amp;',
       '<': '&lt;',
@@ -38,6 +45,6 @@ var MessagesView = {
       "/": '&#x2F;',
     };
     const reg = /[&<>"'/]/ig;
-    return str.replace(reg, (match)=>(map[match])).replace(/(\r\n|\n|\r)/gm, "");
+    return string.replace(reg, (match)=>(map[match]));
   }
 };

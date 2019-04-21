@@ -56,11 +56,11 @@ body {
 
 #main, #chats {
     width: 500px;
+    color: white;
     margin: auto;
     text-align: left;
-    background: white;
+    background:#151f2a;
     padding: 50px 60px;
-    border: solid #ddd;
     border-width: 0 1px 1px 1px;
 }
 
@@ -96,9 +96,13 @@ body {
     line-height: 13px;
 }
 
+#main { 
+    background-color: #1a3247;
+    margin-top: 15px;
+}
+
 form {
     padding: 20px;
-    padding-left: 0;
     margin-bottom: 20px;
 }
 
@@ -120,19 +124,26 @@ input[type=submit]  {
    color: #fff;
    font-size: 14px;
    line-height: 26px;
+   border-radius: 25px;
+   height: 34px;
+   width: 74px;
+   font-weight: bold;
 }
 
 .chat {
-    padding: 5px;
+    padding: 9px 12px;
     margin-bottom: 5px;
-    background-color: #eee;
+    background-color: #151f2a;
     height: 100px;
+    border: 1px solid #38444d;
+    color: white;
 }
 
-img {
-    display: inline;
-    padding: 5px 0 5px 10px;
+.avatar {
     border-radius: 50%;
+    height: 48px;
+    width: auto;
+    margin-top: 5px;
 }
 
 .chat .message-container {
@@ -141,38 +152,56 @@ img {
 }
 
 .chat .username {
-    font-weight: 800;
     display: inline-block;
+    font-weight: bold;
+    padding: 5px 0;
 }
 
 .chat .text { 
     display: block;
+    font-size: 14px;
 }
 
 .chat:hover {
     background-color: #ddd;
 }
 
-.spinner {
-    float: right;
-    height: 46px;
-    margin-bottom: 5px;
-}
-
-.spinner img {
-    padding: 10px;
-}
-
-.friend {
-    color: #fff;
-    background-color: #0090da;
+.avatar-container {
+  padding: 0 10px 0 10px;
+  display: inline;
 }
 
 .message-container {
-    padding-bottom: 30px;
-    display: inline;
+  vertical-align: top;
 }
 
-#room-select {
-    
+.spinner {
+  float: right;
+  height: 46px;
+  margin-bottom: 5px;
+}
+
+.spinner img {
+  padding: 10px;
+}
+
+.friend {
+  color: #fff;
+  background-color: #0090da;
+}
+
+.message-container {
+  padding-bottom: 30px;
+  display: inline;
+}
+
+#message {
+  /* css 3 */
+  height: 20px;
+  background-color: #10161c;
+  border-radius: 10px;
+  /* mozilla */
+  -moz-border-radius:10px;
+  /* webkit */
+  -webkit-border-radius:10px;
 }

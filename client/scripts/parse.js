@@ -25,10 +25,38 @@ var Parse = {
       url: Parse.server,
       type: 'GET',
       data: { order: '-createdAt' },
+      where: { roomname: 'Hello' },
       contentType: 'application/json',
       success: successCB,
       error: errorCB || function(error) {
         console.error('chatterbox: Failed to fetch messages', error);
+      }
+    });
+  },
+
+  readRoom: function(roomname, successCB, errorCB = null) {
+    $.ajax({
+      url: Parse.server,
+      type: 'GET',
+      data: { where: `{"roomname":"${roomname}"}` },
+      contentType: 'application/json',
+      success: successCB,
+      error: errorCB || function(error) {
+        console.error('chatterbox: Failed to fetch messages from room', error);
+      }
+    });
+  },
+
+  // DOESN'T WORK RIGHT NOW
+  getRooms: function() {
+    $.ajax({
+      url: Parse.server,
+      type: 'GET',
+      data: { distinct: `roomname`, project:`{'roomname':'1'}` },
+      contentType: 'application/json',
+      success: successCB,
+      error: errorCB || function(error) {
+        console.error('chatterbox: Failed to fetch rooms', error);
       }
     });
   }

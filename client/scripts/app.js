@@ -8,26 +8,10 @@ var App = {
     App.username = window.location.search.substr(10);
 
     FormView.initialize();
-    RoomsView.initialize();
     MessagesView.initialize();
-
-    // Fetch initial batch of messages
     App.startSpinner();
     App.fetch(App.stopSpinner);
-
-    App.beginUpdates();
-    // setInterval(() => {
-    //   // Set a named function to be executed immediately
-    //   // Named function is returned to setInterval and gets called again on interval
-    //   let newMessages = App.getNewMessages();
-    //   if (newMessages.length > 0) {
-    //     this.renderNewMessages(newMessages);
-    //     console.log('posting new');
-    //   } else {
-    //     console.log('no new messages');
-    //   }
-    // }, 10000);
-
+    RoomsView.initialize();
   },
 
   // Input: a callback function definition
@@ -36,13 +20,11 @@ var App = {
   // Fetch then calls Parse.readAll, passing an anonymous function as the success callback
   // The success callback is ran if the ajax call is successful
   // The success callback in this case is the fadeout of the spinner, and setting Formview Status to false
-  fetch: function(callback = ()=>{}) {
-    Parse.readAll(data => {
-      data.results.forEach(message => {
-        MessagesView.renderMessage(message);
-      });
-      var roomsAlpha = Object.keys(Rooms).sort((a,b) => a.toLowerCase() - b.toLowerCase());
-      roomsAlpha.forEach(room => RoomsView.renderRoom(room));
+  fetch: function(callback = () => {}) {
+    return Parse.readAll((data) => {
+      Messages.currentMessages = data.results.slice();
+      MessagesView.render(data.results);
+      RoomsView.render(data.results);
       console.log(data);
       callback();
     });
@@ -77,11 +59,11 @@ var App = {
       let newMessages = App.getNewMessages();
       if (newMessages.length > 0) {
         this.renderNewMessages(newMessages);
-          console.log('posting new');
-        } else {
+        console.log('posting new');
+      } else {
         console.log('no new messages');
-       }
-       return callback;
+      }
+      return callback;
     }, 5000);
   },
 

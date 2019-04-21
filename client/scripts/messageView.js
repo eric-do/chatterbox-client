@@ -3,10 +3,10 @@ var MessageView = {
   render: _.template(`
    
       <div class="chat">
-        <div class="avatar"><img src="<%= avatar %>"></div>
+        <div class="avatar-container"><img class="avatar" src="<%- avatar %>"></div>
         <div class="message-container">
-          <div class="username"><%= username %></div>
-          <div class="text"><%= text %></div>
+          <div class="username"><%- username %></div>
+          <div class="text"><%- text %></div>
         </div>
         <div></div>
       </div>
