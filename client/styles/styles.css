@@ -129,9 +129,10 @@ input[type=submit]  {
     height: 100px;
 }
 
-.chat .avatar {
-    display: inline-block;
+img {
+    display: inline;
     padding: 5px 0 5px 10px;
+    border-radius: 50%;
 }
 
 .chat .message-container {
@@ -167,3 +168,11 @@ input[type=submit]  {
     background-color: #0090da;
 }
 
+.message-container {
+    padding-bottom: 30px;
+    display: inline;
+}
+
+#room-select {
+    
+}

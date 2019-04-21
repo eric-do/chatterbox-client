@@ -25,21 +25,28 @@
     <div id="main">
       <h1>chatterbox</h1>
       <div class="spinner"><img src="client/images/spiffygif_46x46.gif"></div>
-      <div id="rooms">
-        Room:
-        <select>
-          <option id="addingroom">Add Room</option>
-          <option>Zach's room</option>
-          <option>Eric's room</option>
-        </select>
-        <!-- <button>Add Room</button> -->
-        <input type="text" name="room" id="roomname" disabled/>
-      </div>
+      
       <form action="#" id="send" method="post">
         <input type="text" name="message" id="message" placeholder="What's up?"/>
         <input type="submit" name="submit" class="submit"/>
       </form>
+      <div id="rooms">
+        Create new room:
+        <!-- <select>
+          <option id="addingroom">Add Room</option>
+          <option>Zach's room</option>
+          <option>Eric's room</option>
+        </select> -->
+        <!-- <button>Add Room</button> -->
+        <input type="text" name="room" id="roomname"/>
+      </div>
+      <select id="room-select">
+        <option select="selected">Select room</option>
+        <option>Zach's room</option>
+        <option>Eric's room</option>
+      </select>
     </div>
+    
     <div id="chats"></div>
     <script src="client/env/config.js"></script>
     <script src="client/scripts/parse.js"></script>

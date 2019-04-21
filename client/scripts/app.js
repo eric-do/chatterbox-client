@@ -15,17 +15,18 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
-    setInterval(() => {
-      // Set a named function to be executed immediately
-      // Named function is returned to setInterval and gets called again on interval
-      let newMessages = App.getNewMessages();
-      if (newMessages.length > 0) {
-        this.renderNewMessages(newMessages);
-        console.log('posting new');
-      } else {
-        console.log('no new messages');
-      }
-    }, 10000);
+    App.beginUpdates();
+    // setInterval(() => {
+    //   // Set a named function to be executed immediately
+    //   // Named function is returned to setInterval and gets called again on interval
+    //   let newMessages = App.getNewMessages();
+    //   if (newMessages.length > 0) {
+    //     this.renderNewMessages(newMessages);
+    //     console.log('posting new');
+    //   } else {
+    //     console.log('no new messages');
+    //   }
+    // }, 10000);
 
   },
 
@@ -40,6 +41,8 @@ var App = {
       data.results.forEach(message => {
         MessagesView.renderMessage(message);
       });
+      var roomsAlpha = Object.keys(Rooms).sort((a,b) => a.toLowerCase() - b.toLowerCase());
+      roomsAlpha.forEach(room => RoomsView.renderRoom(room));
       console.log(data);
       callback();
     });
@@ -67,6 +70,20 @@ var App = {
     }
   },
 
+  beginUpdates: () => {
+    // Set a named function to be executed immediately
+    // Named function is returned to setInterval and gets called again on interval
+    setTimeout(function callback() {
+      let newMessages = App.getNewMessages();
+      if (newMessages.length > 0) {
+        this.renderNewMessages(newMessages);
+          console.log('posting new');
+        } else {
+        console.log('no new messages');
+       }
+       return callback;
+    }, 5000);
+  },
 
   startSpinner: function() {
     App.$spinner.show();
