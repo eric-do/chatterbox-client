@@ -60,7 +60,7 @@ body {
     margin: auto;
     text-align: left;
     background:#151f2a;
-    padding: 50px 60px;
+    padding: 50px 60px 10px 60px;
     border-width: 0 1px 1px 1px;
 }
 
@@ -211,4 +211,16 @@ input[type=submit]  {
   align: right;
   height: 20px;
   width: auto;
+  padding-left: 15px;
+}
+
+a:link, a:visited {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #1B95E0;
+  text-decoration: underline;
 }
