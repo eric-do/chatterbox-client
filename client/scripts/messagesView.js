@@ -19,18 +19,16 @@ var MessagesView = {
 
   renderMessage: function(message) {
     // Input: message object to render
-    // Return: nothing??
+    // Return: nothing
     // Get an html object/var from call MessageView.render(message)
     // Append the html to #chats
     if (message.username && message.text) {
       message.username = message.username;
       message.text = message.text.slice(0, 160);
-      Messages[message.objectId] = message.text; 
       Rooms.addRoom(message.roomname);
       message.avatar = `https://api.adorable.io/avatars/90/${message.username}`;
-
       var chat = MessageView.render(message);
-      this.$chats.append(chat);
+      this.$chats.prepend(chat);
     }
   },
 

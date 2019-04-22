@@ -46,6 +46,19 @@ var Parse = {
     });
   },
 
+  getNewMessages: function(timeStamp, successCB, errorCB = null) {
+    $.ajax({
+      url: Parse.server,
+      type: 'GET',
+      data: {where: `{"createdAt":{"$gte":{"__type":"Date","iso":"${timeStamp}"}}}`},
+      contentType: 'application/json',
+      success: successCB,
+      error: errorCB || function(error) {
+        console.error('chatterbox: Failed to fetch new messages', error);
+      }
+    });
+  },
+
   // DOESN'T WORK RIGHT NOW
   getRooms: function() {
     $.ajax({

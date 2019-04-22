@@ -1,9 +1,11 @@
 var FormView = {
 
   $form: $('form'),
+  $getNew: $('#new-messages'),
 
   initialize: function() {
     FormView.$form.on('submit', FormView.handleSubmit);
+    FormView.$getNew.on('click', FormView.handleNewMessages);
   },
 
   handleSubmit: function(event) {
@@ -25,10 +27,17 @@ var FormView = {
     };
     // Stop the browser from submitting the form
     event.preventDefault();
-
     Parse.create(message);
     MessagesView.renderMessage(message);
     console.log('click!');
+  },
+
+  handleNewMessages: function(event) {
+    event.preventDefault();
+    Parse.getNewMessages(Messages.lastTimeStamp, (data) => {
+      console.log(data);
+      MessagesView.render(data.results);
+    });
   },
 
   setStatus: function(active) {

@@ -23,25 +23,12 @@ var App = {
   fetch: function(callback = () => {}) {
     return Parse.readAll((data) => {
       Messages.currentMessages = data.results.slice();
-      MessagesView.render(data.results);
+      Messages.lastTimeStamp = Messages.currentMessages[0].createdAt;
+      MessagesView.render(data.results.reverse());
       RoomsView.render(data.results);
       console.log(data);
       callback();
     });
-  },
-
-  // Input: nothing
-  // Return: nothing
-  // Description: update() should update the chat messages only with new messages
-  // Call Parse.readAll, passing in a function to filter only unique objectId, and render those messages
-  getNewMessages: () => {
-    let newMessages = [];
-    Parse.readAll(data => {
-      newMessages = data.results.filter(message => {
-        return (!Messages[message['objectId']]);
-      });
-    });
-    return newMessages;
   },
   
   renderNewMessages: (data) => {

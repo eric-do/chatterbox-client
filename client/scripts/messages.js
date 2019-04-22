@@ -1,5 +1,6 @@
 var Messages = {
   currentMessages : [],
+  lastTimeStamp: 0,
 
   getFilteredRooms : function(roomFilter) {
     var filtered = this.currentMessages.filter(message => {
